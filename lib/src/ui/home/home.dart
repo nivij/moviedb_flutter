@@ -15,6 +15,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../res/buttons/appbar.dart';
 import '../../res/buttons/list_button.dart';
 import '../../res/string/string.dart';
+import '../../res/widgets/cardloading.dart';
 
 class HomePage extends HookWidget {
   @override
@@ -22,6 +23,8 @@ class HomePage extends HookWidget {
     final currentImageIndex = useState(0);
     final movieBloc = BlocProvider.of<MovieBloc>(context);
     final state = BlocProvider.of<MovieBloc>(context).state;
+    final isLoading = state is MovieLoading;
+
     useEffect(() {
       movieBloc.add(MovieEventStarted(0, ""));
     }, []);
@@ -30,20 +33,28 @@ class HomePage extends HookWidget {
       // Your logic for the Watch button tap
       print("Watch button tapped!");
     }
-    String getMovieText(int index) {
+    Widget getMovieText(int index, bool isLoading) {
       if (state is MovieLoaded && index >= 0 && index < state.movielist.length) {
         print(state.movielist[index].title);
-        return state.movielist[index].originalTitle;
-
+        return Text(
+          state.movielist[index].originalTitle,
+          style: GoogleFonts.outfit(color: Colors.white),
+        );
       }
-      return "";
+      return isLoading ? ShimmerLoadingWidget(width: 90,height: 20,) : Text('');
     }
 
-    String getMovieGenre(int index) {
-      if (state is MovieLoaded && index >= 0 && index < state.movielist.length) {
-        return state.movielist[index].originalLanguage;
+
+    Widget getMovieGenre(int index,bool isLoading) {
+      if (state is MovieLoaded && index >= 0 &&
+          index < state.movielist.length) {
+        return Text(
+          state.movielist[index].title,
+          style: GoogleFonts.outfit(color: Colors.white.withOpacity(0.6)),
+        )
+        ;
       }
-      return "";
+      return isLoading ? ShimmerLoadingWidget(width: 70, height: 20,) : Text('');
     }
 
     return Scaffold(
@@ -96,15 +107,9 @@ class HomePage extends HookWidget {
             //   },
             // ),
             kheight20,
-            Text(
-              "${getMovieText(currentImageIndex.value)}",
-              style: GoogleFonts.outfit(color: Colors.white),
-            ),
+            getMovieText(currentImageIndex.value, isLoading),
             kheight10,
-            Text(
-              "${getMovieGenre(currentImageIndex.value)}",
-              style: GoogleFonts.outfit(color: Colors.white.withOpacity(0.6)),
-            ),
+           getMovieGenre(currentImageIndex.value, isLoading),
             kheight20,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
