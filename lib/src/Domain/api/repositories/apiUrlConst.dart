@@ -6,4 +6,8 @@ class ApiConstants {
 
   // Add more endpoints as needed
   static const String popularMoviesEndpoint = '/movie/popular';
+
+
+  static Duration connectionTimeout = Duration(milliseconds: 1000);
+  static Duration receiveTimeout = Duration(milliseconds: 1000);
 }

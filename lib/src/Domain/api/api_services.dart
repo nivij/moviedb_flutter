@@ -1,16 +1,21 @@
-// apiservices.dart
 import 'package:dio/dio.dart';
 import '../model/model.dart';
 import 'repositories/apiUrlConst.dart';
 
-
 class Apiservices {
-  final Dio dio = Dio();
+  final Dio dio;
+
+  // Constructor to initialize Dio with custom timeouts
+  Apiservices() : dio = Dio(BaseOptions(
+    connectTimeout: ApiConstants.connectionTimeout,
+    receiveTimeout: ApiConstants.receiveTimeout,
+  ));
 
   Future<List<Movie>> getNowplayingMovies() async {
     try {
       final url = '${ApiConstants.baseUrl}${ApiConstants.popularMoviesEndpoint}';
       print("API Call");
+
       final response = await dio.get(
         url,
         queryParameters: {'api_key': ApiConstants.apiKey},
