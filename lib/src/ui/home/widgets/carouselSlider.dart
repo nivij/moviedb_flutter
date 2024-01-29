@@ -49,6 +49,7 @@ class CarosuelSliderWidget extends StatelessWidget {
               fadeInDuration: Duration(milliseconds: 100),
               imageUrl:  imageUrl,
               fit: BoxFit.cover,
+
               placeholder: (context, url) => ShimmerLoadingWidget(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
