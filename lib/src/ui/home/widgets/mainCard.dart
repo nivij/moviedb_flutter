@@ -16,7 +16,7 @@ class maincard extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10),
-            height: 200,
+            height: 220,
             width: 150,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
