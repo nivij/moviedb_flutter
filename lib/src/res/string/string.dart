@@ -25,3 +25,7 @@ class AppBarString{
 
   );
 }
+
+String buildImageUrl(String path) {
+  return 'https://image.tmdb.org/t/p/original/$path';
+}

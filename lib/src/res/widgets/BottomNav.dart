@@ -1,6 +1,5 @@
 import 'package:codenoramovie/src/ui/discover/discover.dart';
 import 'package:codenoramovie/src/ui/home/home.dart';
-import 'package:codenoramovie/src/ui/home/homePage2Bloc.dart';
 import 'package:codenoramovie/src/ui/settings/settings.dart';
 import 'package:codenoramovie/src/ui/watchlist/watchlist.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';

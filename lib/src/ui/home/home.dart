@@ -79,7 +79,7 @@ class HomePage extends HookWidget {
                 if (state is MovieLoaded) {
                   return  CarosuelSliderWidget(
                     imageUrls: state.movielist
-                        .map((movie) => 'https://image.tmdb.org/t/p/original/${movie.backdropPath}')
+                        .map((movie) => buildImageUrl(movie.backdropPath))
                         .toList(),
                     onImageChanged: (index) {
                       print("Index changed: $index");
