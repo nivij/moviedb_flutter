@@ -13,19 +13,19 @@ Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state, int currentIn
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CarosuelSliderWidget(
-          imageUrls: state.movielist
+          imageUrls: state.NowplayingList
               .map((movie) => buildImageUrl(movie.backdropPath))
               .toList(),
           onImageChanged: onImageChanged,
         ),
         SizedBox(height: 20),
         Text(
-          state.movielist[currentIndex].originalTitle,
+          state.NowplayingList[currentIndex].originalTitle,
           style: TextStyle(color: Colors.white),
         ),
         SizedBox(height: 10),
         Text(
-          state.movielist[currentIndex].title,
+          state.NowplayingList[currentIndex].title,
           style: TextStyle(color: Colors.white.withOpacity(0.6)),
         ),
         SizedBox(height: 20),
@@ -56,9 +56,9 @@ Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state, int currentIn
           ],
         ),
         SizedBox(height: 20),
-        main_title_card(title: "Now Playing"),
+        main_title_card(title: "Now Playing",state: state,),
         SizedBox(height: 20),
-        main_title_card(title: "Released in the past year"),
+        main_title_card(title: "Released in the past year",state: state,),
         SizedBox(height: 20),
       ],
     ),
