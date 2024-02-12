@@ -19,10 +19,14 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final movieBloc = BlocProvider.of<MovieBloc>(context);
-
     useEffect(() {
       movieBloc.add(MovieEventStarted(0, ""));
+      return () {
+        // Clean up
+      };
     }, []);
+
+    final currentIndex = useState<int>(0);
 
     return Scaffold(
       appBar: AppBar(
@@ -39,8 +43,11 @@ class HomePage extends HookWidget {
       body: BlocBuilder<MovieBloc, MovieState>(
         bloc: movieBloc,
         builder: (context, state) {
+          print("State: $state"); // Add this line for debugging
           if (state is MovieLoaded) {
-            return buildMovieLoadedUI(context, state); // Call the method
+            return buildMovieLoadedUI(context, state, currentIndex.value, (index) {
+              currentIndex.value = index;
+            });
           } else if (state is MovieLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is MovieError) {

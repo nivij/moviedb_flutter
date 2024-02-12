@@ -6,8 +6,8 @@ import 'package:codenoramovie/src/res/images/assetsImage.dart';
 import 'package:codenoramovie/src/res/widgets/watchButton.dart';
 import '../../../res/buttons/list_button.dart';
 import '../../../res/string/string.dart';
-
-Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state) {
+import 'package:flutter_hooks/flutter_hooks.dart';
+Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state, int currentIndex, Function(int) onImageChanged) {
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -16,18 +16,16 @@ Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state) {
           imageUrls: state.movielist
               .map((movie) => buildImageUrl(movie.backdropPath))
               .toList(),
-          onImageChanged: (index) {
-            print("Index changed: $index");
-          },
+          onImageChanged: onImageChanged,
         ),
         SizedBox(height: 20),
         Text(
-          state.movielist[0].originalTitle,
+          state.movielist[currentIndex].originalTitle,
           style: TextStyle(color: Colors.white),
         ),
         SizedBox(height: 10),
         Text(
-          state.movielist[0].title,
+          state.movielist[currentIndex].title,
           style: TextStyle(color: Colors.white.withOpacity(0.6)),
         ),
         SizedBox(height: 20),
