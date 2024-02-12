@@ -21,7 +21,7 @@ class main_title_card extends StatelessWidget {
         ),
         kheight10,
         LimitedBox(
-          maxHeight: 280,
+          maxHeight: 230,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children:

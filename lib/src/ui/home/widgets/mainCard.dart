@@ -25,9 +25,8 @@ class maincard extends StatelessWidget {
             ),
 
           ),
-          kheight10,
-          Text(filmImage.text,style: GoogleFonts.outfit(color: Colors.white),),
-          Text(filmImage.text,style: GoogleFonts.outfit(color: Colors.white),)
+
+
         ],
 
     );

@@ -46,9 +46,9 @@ class CarosuelSliderWidget extends StatelessWidget {
           return Container(
             width: double.infinity,
             child: CachedNetworkImage(
-              fadeInDuration: Duration(milliseconds: 100),
+
               imageUrl:  imageUrl,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitHeight,
 
               placeholder: (context, url) => ShimmerLoadingWidget(),
               errorWidget: (context, url, error) => Icon(Icons.error),
