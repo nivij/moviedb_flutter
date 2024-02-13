@@ -1,16 +1,13 @@
-import 'package:codenoramovie/src/ui/home/widgets/homePageLoadedUI.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:codenoramovie/src/bloc/moviebloc/movie_bloc.dart';
 import 'package:codenoramovie/src/bloc/moviebloc/movie_bloc_event.dart';
 import 'package:codenoramovie/src/bloc/moviebloc/movies_bloc_state.dart';
-import 'package:codenoramovie/src/res/images/assetsImage.dart';
-import 'package:codenoramovie/src/res/widgets/watchButton.dart';
-import 'package:codenoramovie/src/ui/home/widgets/carouselSlider.dart';
-import 'package:codenoramovie/src/ui/home/widgets/dummyLoading.dart';
-import 'package:codenoramovie/src/ui/home/widgets/trending_card.dart';
 
+import 'package:codenoramovie/src/ui/home/widgets/homePageLoadedUI.dart';
+import 'package:codenoramovie/src/ui/home/widgets/dummyLoading.dart';
 import '../../res/buttons/appbar.dart';
 import '../../res/buttons/list_button.dart';
 import '../../res/string/string.dart';
@@ -19,12 +16,9 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final movieBloc = BlocProvider.of<MovieBloc>(context);
-    useEffect(() {
+    if (movieBloc.state is! MovieLoaded) {
       movieBloc.add(MovieEventStarted(0, ""));
-      return () {
-        // Clean up
-      };
-    }, []);
+    }
 
     final currentIndex = useState<int>(0);
 
@@ -49,9 +43,31 @@ class HomePage extends HookWidget {
               currentIndex.value = index;
             });
           } else if (state is MovieLoading) {
-            return Center(child: CircularProgressIndicator());
+            return DummyLoading();
           } else if (state is MovieError) {
-            return Text('Error fetching movies');
+            // Show dummy loading for 10 seconds before showing popup
+            Future.delayed(Duration(seconds: 5), () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+
+                    title: Text("Network Error"),
+                    content: Text("Error fetching movies. Please check your network connection."),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          movieBloc.add(MovieEventStarted(0, ""));
+                        },
+                        child: Text("OK"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            });
+            return DummyLoading();
           } else {
             return Text('Unknown state');
           }

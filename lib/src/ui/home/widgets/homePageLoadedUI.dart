@@ -7,6 +7,8 @@ import 'package:codenoramovie/src/res/widgets/watchButton.dart';
 import '../../../res/buttons/list_button.dart';
 import '../../../res/string/string.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+import '../../../res/widgets/videoPlayer.dart';
 Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state, int currentIndex, Function(int) onImageChanged) {
   return SingleChildScrollView(
     child: Column(
@@ -42,7 +44,14 @@ Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state, int currentIn
             ),
             WatchButton(
               onTap: () {
-                print("Watch button tapped!");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FullScreenVideoPlayer(
+                      videoUrl: 'https://www.youtube.com/watch?v=scJy6gA230s',
+                    ),
+                  ),
+                );
               },
             ),
             Expanded(
