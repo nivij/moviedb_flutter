@@ -25,6 +25,7 @@ class HomePage extends HookWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
+        leadingWidth: 20,
         title: 'CodeNora',
         actions: [
           constSearchIconButton(),
