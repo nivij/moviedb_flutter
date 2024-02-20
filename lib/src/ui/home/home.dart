@@ -11,6 +11,7 @@ import 'package:codenoramovie/src/ui/home/widgets/dummyLoading.dart';
 import '../../res/buttons/appbar.dart';
 import '../../res/buttons/list_button.dart';
 import '../../res/string/string.dart';
+import '../../res/widgets/Appbar.dart';
 
 class HomePage extends HookWidget {
   @override
@@ -23,9 +24,8 @@ class HomePage extends HookWidget {
     final currentIndex = useState<int>(0);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF121318),
-        title: Text('CodeNora', style: AppBarString.titleStyle),
+      appBar: CustomAppBar(
+        title: 'CodeNora',
         actions: [
           constSearchIconButton(),
           kwidtht10,

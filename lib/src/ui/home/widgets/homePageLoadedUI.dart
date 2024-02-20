@@ -56,6 +56,7 @@ Widget buildMovieLoadedUI(BuildContext context, MovieLoaded state, int currentIn
             ),
             Expanded(
               child: My_List_Button(
+
                 icon: Icons.bookmark,
                 title: 'watchList',
                 IconSize: 23,

@@ -1,5 +1,8 @@
 import 'package:codenoramovie/src/res/string/string.dart';
+import 'package:codenoramovie/src/ui/InnerInfo/DetailsPAge.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../bloc/moviebloc/movies_bloc_state.dart';
 import '../../../res/images/assetsImage.dart';
@@ -29,12 +32,12 @@ class main_title_card extends StatelessWidget {
             children: List.generate(
               1,
                   (index) => maincard(
-                index: index,
-                imageUrls: state.PopularmoviesList
+                                  index: index,
+                                  imageUrls: state.PopularmoviesList
                     .take(5)
                     .map((movie) => buildImageUrl(movie.backdropPath))
                     .toList(),
-              ),
+                                ),
             ),
           ),
         ),
